@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steven Taveras Game Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+        
+        .font-orbitron { font-family: 'Orbitron', monospace; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .glow {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .typing-animation {
+            overflow: hidden;
+            border-right: 3px solid #667eea;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #667eea }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-inter">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-900/95 backdrop-blur-sm z-50 border-b border-purple-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="font-orbitron font-bold text-xl text-purple-400">
+                    🎮 Steven Taveras Game Lab
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-300 hover:text-purple-400 transition-colors">Home</a>
+                    <a href="#projects" class="nav-link text-gray-300 hover:text-purple-400 transition-colors">Projects</a>
+					<a href="#AIprojects" class="nav-link text-gray-300 hover:text-purple-400 transition-colors">AI Projects</a>
+                    <a href="#about" class="nav-link text-gray-300 hover:text-purple-400 transition-colors">About</a>
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-purple-400 transition-colors">Contact</a>
+                </div>
+                <button class="md:hidden text-purple-400" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 border-t border-purple-500/20">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#home" class="block py-2 text-gray-300 hover:text-purple-400">Home</a>
+                <a href="#projects" class="block py-2 text-gray-300 hover:text-purple-400">Projects</a>
+				 <a href="#AIprojects" class="block py-2 text-gray-300 hover:text-purple-400">AI Projects</a>
+                <a href="#about" class="block py-2 text-gray-300 hover:text-purple-400">About</a>
+                <a href="#contact" class="block py-2 text-gray-300 hover:text-purple-400">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen gradient-bg flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <div class="floating">
+                <h1 class="font-orbitron font-black text-5xl md:text-7xl mb-6 text-white">
+                    Steven Taveras
+                    <span class="block text-3xl md:text-5xl text-purple-300 mt-2">Game Lab</span>
+                </h1>
+            </div>
+            <div class="typing-animation font-inter text-xl md:text-2xl text-purple-100 mb-8 inline-block">
+                FRONT END DEVELOPER & GRAPHIC DESIGNER
+            </div>
+            <p class="text-lg md:text-xl text-purple-100 mb-12 max-w-2xl mx-auto leading-relaxed">
+                Welcome to my digital playground. This is a space where code meets creativity, showcasing a collection of playable web demos, from nostalgic pixel art adventures to cutting-edge Unity projects.
+            </p>
+            <div class="space-x-4">
+                <button onclick="scrollToSection('projects')" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded-lg font-semibold transition-all glow hover:scale-105">
+                    Explore Games
+                </button>
+                <button onclick="scrollToSection('about')" class="border-2 border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all">
+                    Learn More
+                </button>
+            </div>
+        </div>
+        
+        <!-- Floating Game Icons -->
+        <div class="absolute top-20 left-10 text-4xl opacity-20 floating" style="animation-delay: -2s;">🎯</div>
+        <div class="absolute top-40 right-20 text-3xl opacity-20 floating" style="animation-delay: -4s;">⚔️</div>
+        <div class="absolute bottom-40 left-20 text-5xl opacity-20 floating" style="animation-delay: -1s;">🏰</div>
+        <div class="absolute bottom-20 right-10 text-3xl opacity-20 floating" style="animation-delay: -3s;">🎮</div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-orbitron font-bold text-4xl md:text-5xl mb-6 text-purple-400">Game Portfolio</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Dive into my collection of interactive experiences, from addictive Match-3 games like Spot-A-Fish to  Sidescrolling Space Shooters.
+                </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
+                <button onclick="filterGames('all')" class="filter-btn active bg-purple-600 text-white px-6 py-2 rounded-full font-medium transition-all">All Games</button>
+                <button onclick="filterGames('puzzle')" class="filter-btn bg-gray-700 hover:bg-purple-600 text-gray-300 hover:text-white px-6 py-2 rounded-full font-medium transition-all">Puzzle</button>
+                <button onclick="filterGames('arcade')" class="filter-btn bg-gray-700 hover:bg-purple-600 text-gray-300 hover:text-white px-6 py-2 rounded-full font-medium transition-all">Arcade</button>
+            </div>
+
+            <!-- Games Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Game Card 1 -->
+                <div class="game-card puzzle fade-in bg-gray-900 rounded-xl overflow-hidden card-hover" data-category="puzzle">
+                    <div class="h-48 bg-gradient-to-br from-pink-500 to-purple-600 relative flex items-center justify-center">
+                        <div class="text-6xl">💎</div>
+                        <div class="absolute top-4 right-4 bg-black/50 px-3 py-1 rounded-full text-sm">Puzzle</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-orbitron font-bold text-xl mb-3 text-purple-400">Spot-A-Fish Match-3</h3>
+                        <p class="text-gray-300 mb-4">Addictive match-3 puzzle game with power-ups, cascading combos, and challenging level progression.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-sm">Unity 2D</span>
+                            <span class="bg-orange-600/20 text-orange-300 px-3 py-1 rounded-full text-sm">C#</span>
+                            <span class="bg-pink-600/20 text-pink-300 px-3 py-1 rounded-full text-sm">Pixel-Art</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button onclick="playGame('match-3')" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg font-medium transition-colors">Play Now</button>
+                            <button onclick="viewDetails('match-3')" class="flex-1 border border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white py-2 rounded-lg font-medium transition-colors">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 2 -->
+                <div class="game-card arcade fade-in bg-gray-900 rounded-xl overflow-hidden card-hover" data-category="arcade">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-cyan-600 relative flex items-center justify-center">
+                        <div class="text-6xl">🐦</div>
+                        <div class="absolute top-4 right-4 bg-black/50 px-3 py-1 rounded-full text-sm">Arcade</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-orbitron font-bold text-xl mb-3 text-purple-400">Dodge Dodge Adventure</h3>
+                        <p class="text-gray-300 mb-4">Fast-paced dodging game with obstacles, power-ups, and endless gameplay mechanics.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-sm">Unity 2D</span>
+                            <span class="bg-yellow-600/20 text-yellow-300 px-3 py-1 rounded-full text-sm">C#</span>
+                            <span class="bg-red-600/20 text-red-300 px-3 py-1 rounded-full text-sm">pixel-Art</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button onclick="playGame('dodge-game')" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg font-medium transition-colors">Play Now</button>
+                            <button onclick="viewDetails('dodge-game')" class="flex-1 border border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white py-2 rounded-lg font-medium transition-colors">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 3 -->
+                <div class="game-card puzzle fade-in bg-gray-900 rounded-xl overflow-hidden card-hover" data-category="puzzle">
+                    <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 relative flex items-center justify-center">
+                        <div class="text-6xl">🧩</div>
+                        <div class="absolute top-4 right-4 bg-black/50 px-3 py-1 rounded-full text-sm">Puzzle</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-orbitron font-bold text-xl mb-3 text-purple-400">Mystry Drive</h3>
+                        <p class="text-gray-300 mb-4">Brain-teasing driveing / card matching game puzzle platformer</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-sm">Unity 2D-3D</span>
+                            <span class="bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full text-sm">C#</span>
+                            <span class="bg-orange-600/20 text-orange-300 px-3 py-1 rounded-full text-sm">PS1 , Pixel Graphics</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button onclick="playGame('mystery-drive')" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg font-medium transition-colors">Play Now</button>
+                            <button onclick="viewDetails('mystery-drive')" class="flex-1 border border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white py-2 rounded-lg font-medium transition-colors">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 4 -->
+                <div class="game-card arcade fade-in bg-gray-900 rounded-xl overflow-hidden card-hover" data-category="arcade">
+                    <div class="h-48 bg-gradient-to-br from-red-500 to-pink-600 relative flex items-center justify-center">
+                        <div class="text-6xl">🚀</div>
+                        <div class="absolute top-4 right-4 bg-black/50 px-3 py-1 rounded-full text-sm">Arcade</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-orbitron font-bold text-xl mb-3 text-purple-400">Space Shooter: Alden's Exodus</h3>
+                        <p class="text-gray-300 mb-4">Classic space shooter with modern graphics, weapon upgrades, and epic boss battles.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-purple-600/20 text-purple-300 px-3 py-1 rounded-full text-sm">JavaScript</span>
+                            <span class="bg-orange-600/20 text-orange-300 px-3 py-1 rounded-full text-sm">Canvas</span>
+                            <span class="bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full text-sm">WebAudio</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button onclick="playGame('space-shooter')" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg font-medium transition-colors">Play Now</button>
+                            <button onclick="viewDetails('space-shooter')" class="flex-1 border border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white py-2 rounded-lg font-medium transition-colors">Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<section id="AIprojects" class="py-20 bg-gray-800">
+	</section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h2 class="font-orbitron font-bold text-4xl md:text-5xl mb-6 text-purple-400">About the Developer</h2>
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        Hi! I'm Steven Taveras, a passionate game and web developer with a love for creating fun digital experiences. 
+                        My journey began with simple browser games and has evolved into crafting more complex interactive games.
+                    </p>
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        I specialize in Unity development, web-based games, and innovative gameplay mechanics. Each project 
+                        is an opportunity to push creative boundaries and explore new technologies.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-purple-400 mb-2">10+</div>
+                            <div class="text-gray-300">Games Created</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-purple-400 mb-2">5+</div>
+                            <div class="text-gray-300">Years Experience</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <span class="bg-purple-600/20 text-purple-300 px-4 py-2 rounded-full">Unity</span>
+                        <span class="bg-blue-600/20 text-blue-300 px-4 py-2 rounded-full">JavaScript</span>
+                        <span class="bg-green-600/20 text-green-300 px-4 py-2 rounded-full">C#</span>
+                        <span class="bg-orange-600/20 text-orange-300 px-4 py-2 rounded-full">Python</span>
+                        <span class="bg-pink-600/20 text-pink-300 px-4 py-2 rounded-full">Game Design</span>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <div class="bg-gray-800 rounded-xl p-8 glow">
+                        <h3 class="font-orbitron font-bold text-2xl mb-6 text-purple-400">Mission Statement</h3>
+                        <blockquote class="text-lg text-gray-300 italic leading-relaxed">
+                            "To create games that not only entertain but inspire creativity, challenge minds, 
+                            and bring people together through shared digital experiences. Every line of code 
+                            is written with the player's joy in mind."
+                        </blockquote>
+                        <div class="mt-6 flex items-center">
+                            <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-xl">🎮</div>
+                            <div class="ml-4">
+                                <div class="font-semibold text-purple-400">Steven Taveras</div>
+                                <div class="text-gray-400">Game Developer & Designer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-orbitron font-bold text-4xl md:text-5xl mb-6 text-purple-400">Let's Collaborate</h2>
+                <p class="text-xl text-gray-300">
+                    Ready to bring your game idea to life? Let's discuss your next project!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="fade-in">
+                    <h3 class="font-orbitron font-bold text-2xl mb-6 text-purple-400">Get In Touch</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
+                                📧
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white">Email</div>
+                                <div class="text-gray-300">steventaveras@steventaveras.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
+                                💼
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white">LinkedIn</div>
+                                <div class="text-gray-300">linkedin.com/in/steven-taveras-81475b75</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
+                                🐙
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white">GitHub</div>
+                                <div class="text-gray-300">github.com/dreamsniper</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in">
+                    <form class="bg-gray-900 rounded-xl p-8 glow" onsubmit="handleContactForm(event)">
+                        <div class="mb-6">
+                            <label class="block text-purple-400 font-semibold mb-2">Name</label>
+                            <input type="text" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-400 focus:outline-none transition-colors" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-purple-400 font-semibold mb-2">Email</label>
+                            <input type="email" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-400 focus:outline-none transition-colors" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-purple-400 font-semibold mb-2">Project Type</label>
+                            <select class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-400 focus:outline-none transition-colors">
+                                <option>Game Development</option>
+                                <option>Consultation</option>
+                                <option>Collaboration</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-purple-400 font-semibold mb-2">Message</label>
+                            <textarea rows="4" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-purple-400 focus:outline-none transition-colors" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition-colors glow">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-purple-500/20 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-orbitron font-bold text-xl text-purple-400 mb-4">
+                    🎮 Steven Taveras Game Lab
+                </div>
+                <p class="text-gray-400 mb-4">
+                    Crafting digital experiences that inspire and entertain.
+                </p>
+                <div class="text-gray-500">
+                    © 2024 Steven Taveras Game Lab. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Game Detail Modal -->
+    <div id="game-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-900 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 id="modal-title" class="font-orbitron font-bold text-3xl text-purple-400"></h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl">×</button>
+                </div>
+                <div id="modal-content" class="space-y-6">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Fade in animation on scroll
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Game filtering
+        function filterGames(category) {
+            const cards = document.querySelectorAll('.game-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update button states
+            buttons.forEach(btn => {
+                btn.classList.remove('active', 'bg-purple-600', 'text-white');
+                btn.classList.add('bg-gray-700', 'text-gray-300');
+            });
+            
+            event.target.classList.add('active', 'bg-purple-600', 'text-white');
+            event.target.classList.remove('bg-gray-700', 'text-gray-300');
+            
+            // Filter cards
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        // Game actions
+        function playGame(gameId) {
+			switch(gameId) {
+				case 'match-3':
+				openGameWindow('apps/spot-a-fish/index.html');
+				break;
+				case '-':
+				printf("%.1lf - %.1lf = %.1lf", n1, n2, n1 - n2);
+				break;
+				case '*':
+				printf("%.1lf * %.1lf = %.1lf", n1, n2, n1 * n2);
+				break;
+				case '/':
+				printf("%.1lf / %.1lf = %.1lf", n1, n2, n1 / n2);
+				break;
+				default:
+				alert(`🎮 Launching ${gameId}! This would open the game in a new window or embedded player.`);
+				}
+        }
+		
+		function openGameWindow(url) {
+			// spot-a-fish
+			const w = 1024, h = 720;
+			const left = (screen.width/2)-(w/2);
+			const top = (screen.height/2)-(h/2);
+			window.open(url, "SpotAFish", `width=${w},height=${h},top=${top},left=${left},resizable=yes`);
+		}
+
+
+        function viewDetails(gameId) {
+            const gameDetails = {
+                'match-3': {
+                    title: 'Spot-A-Fish Match-3',
+                    description: 'An addictive match-3 puzzle game with power-ups, cascading combos, and challenging level progression.',
+                    features: ['10+ levels', 'Special power-ups', 'Pixel art animation', 'Original Music'],
+                    tech: 'Developed using Unity 2D C# scripting with custom physics engine, with art and animation done in Photoshop',
+                    development: 'Created as a web-first experience with focus on smooth animations and responsive design.'
+                },
+				'dodge-game' : {
+					title: 'Dodge Dodge',
+                    description: 'An fun endless dodge game with power-ups and a race to the highest score.',
+                    features: ['10+ levels', 'Special power-ups','Leaderboards'],
+                    tech: 'Developed using Unity 2D and C# scrpts with art and animation done in Photoshop.',
+                    development: 'Created as a web-first experience with focus on smooth animations and responsive design.'
+				},
+				'mystery-drive' : {
+					title: 'Mystery Drive',
+                    description: 'A fun driving game, where you find puzzles and match cards to progress to the next.',
+                    features: ['3+ levels', 'PS1 style Graphics', 'Custom music and sounds'],
+                    tech: 'Developed using Unity 2D and 3D and C# scripting with custom physics engine.',
+                    development: 'Created as a web-first experience with focus on smooth animations and responsive design.'
+				},
+				'space-shooter' : {
+					title: 'Finding Home: Aldens Exodus',
+                    description: 'A fun Gradius style story based epic space shooter',
+                    features: ['6+ levels', 'Special power-ups', 'highscore features'],
+                    tech: 'Developed using HTML5 Canvas and JavaScript with custom physics engine, but currently moving to Unity 2D',
+                    development: 'Created as a web-first experience with focus on smooth animations and responsive design.'
+				}
+            };
+
+            const game = gameDetails[gameId];
+            if (game) {
+                document.getElementById('modal-title').textContent = game.title;
+                document.getElementById('modal-content').innerHTML = `
+                    <div class="bg-gray-800 rounded-lg p-6 mb-6">
+                        <h4 class="font-semibold text-purple-400 mb-3">Game Overview</h4>
+                        <p class="text-gray-300">${game.description}</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-800 rounded-lg p-6">
+                            <h4 class="font-semibold text-purple-400 mb-3">Key Features</h4>
+                            <ul class="space-y-2">
+                                ${game.features.map(feature => `<li class="text-gray-300">• ${feature}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-6">
+                            <h4 class="font-semibold text-purple-400 mb-3">Technology</h4>
+                            <p class="text-gray-300">${game.tech}</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800 rounded-lg p-6">
+                        <h4 class="font-semibold text-purple-400 mb-3">Development Notes</h4>
+                        <p class="text-gray-300">${game.development}</p>
+                    </div>
+                    <div class="flex space-x-4 pt-4">
+                        <button onclick="playGame('${gameId}')" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">Play Game</button>
+                        <button onclick="closeModal()" class="border border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-white px-6 py-3 rounded-lg font-semibold transition-colors">Close</button>
+                    </div>
+                `;
+                document.getElementById('game-modal').classList.remove('hidden');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('game-modal').classList.add('hidden');
+        }
+
+        // Contact form handler
+        function handleContactForm(event) {
+            event.preventDefault();
+            alert('Thank you for your message! This is a demo form. In a real implementation, this would send your message to Steven.');
+        }
+
+        // Smooth navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Initialize animations on scroll
+        window.addEventListener('scroll', handleScrollAnimations);
+        window.addEventListener('load', handleScrollAnimations);
+
+        // Close modal when clicking outside
+        document.getElementById('game-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9733f929a75cc46b',t:'MTc1NTg4MjUxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
