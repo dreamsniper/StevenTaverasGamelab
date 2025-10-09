@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Steven Taveras Game Lab</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for consistent floating icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-9s+7XQKq5s3E4x7D1zVQe2+9Yc1Xq5Yk5G6JH8V0x1Yz5w6z7a2v9s4B3c1d2f6G" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
         
@@ -134,11 +136,19 @@
             </div>
         </div>
         
-        <!-- Floating Game Icons -->
-        <div class="absolute top-20 left-10 text-4xl opacity-20 floating" style="animation-delay: -2s;">ðŸŽ¯</div>
-        <div class="absolute top-40 right-20 text-3xl opacity-20 floating" style="animation-delay: -4s;">âš”ï¸</div>
-        <div class="absolute bottom-40 left-20 text-5xl opacity-20 floating" style="animation-delay: -1s;">ðŸ°</div>
-        <div class="absolute bottom-20 right-10 text-3xl opacity-20 floating" style="animation-delay: -3s;">ðŸŽ®</div>
+        <!-- Floating Game Icons (Font Awesome) -->
+        <div class="absolute top-20 left-10 text-4xl opacity-20 floating" style="animation-delay: -2s;">
+            <i class="fa-solid fa-gamepad"></i>
+        </div>
+        <div class="absolute top-40 right-20 text-3xl opacity-20 floating" style="animation-delay: -4s;">
+            <i class="fa-solid fa-chess-knight"></i>
+        </div>
+        <div class="absolute bottom-40 left-20 text-5xl opacity-20 floating" style="animation-delay: -1s;">
+            <i class="fa-solid fa-ship"></i>
+        </div>
+        <div class="absolute bottom-20 right-10 text-3xl opacity-20 floating" style="animation-delay: -3s;">
+            <i class="fa-solid fa-joystick"></i>
+        </div>
     </section>
 
     <!-- Projects Section -->
