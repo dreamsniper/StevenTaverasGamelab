@@ -1,0 +1,19 @@
+{
+  "name": "contact-server",
+  "version": "1.0.0",
+  "description": "Simple contact form server using Express and Nodemailer",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.8.0",
+    "helmet": "^7.0.0",
+    "nodemailer": "^6.9.3"
+  }
+}
